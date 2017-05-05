@@ -1,0 +1,79 @@
+[user]
+  email = therewasadrizzle@gmail.com
+  name = Artem Skripka
+[core]
+  autocrlf = false
+[color]
+  ui = always
+[color "branch"]
+  current = yellow bold
+  local = green bold
+  remote = cyan bold
+[color "status"]
+  added = green bold
+  changed = yellow bold
+  untracked = red bold
+[alias]
+  co = checkout
+  st = status -sb
+  br = branch
+  plog = log --pretty=format:\"%C(yellow)%h %C(blue)%ad%C(red)%d %C(reset)%s%C(green) [%cn]\" --decorate --date=short --graph
+  plogv = log --pretty=format:\"%C(yellow)%h %C(blue)%ad%C(red)%d %C(reset)%s%C(green) [%cn]\" --decorate --date=short --numstat  --graph
+  ci = commit
+  cm = commit -m
+  st = status
+  lol = log --pretty=oneline --abbrev-commit --graph --decorate
+  # also use "lg -p"
+  lg  = log --color --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit
+  lgp = log --color --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit -p
+  g = git
+  gst = g st
+  gco = g co
+  gci = g ci
+  gcm = g cm
+  unstage = reset HEAD
+  aa = add .
+  # Not yet added - doesn't include ignored files
+  new = ls-files --others --exclude-standard
+  # Files that are in the staging area
+  added = diff --cached --name-only
+  today = log --stat --since='1 Day Ago' --graph --pretty=oneline --abbrev-commit --date=relative
+  ff = merge --ff-only
+  pullsubs = submodule foreach git pull origin master
+  tags = tag -l
+  branches = branch -a
+  remotes = remote -v
+  filechanges = diff --summary
+  changes = diff --name-status
+  wdiff = diff --word-diff
+  ll = log -10 --pretty=format:\"%h %Cblue%ar %Cgreen%an%Creset: %s %Cred%d\"
+  gr = log --graph --pretty=format:\"%Cred%h %Cblue%ar%Creset %Cgreen%an%Creset %s %Cred%d\"
+  where = branch -av --contains
+  unstage = reset HEAD --
+  last = log -1 HEAD
+  up = pull --rebase
+  put = push origin HEAD
+  tc = diff --cached
+  rmdf = !git rm $(git ls-files --deleted)
+  tree = log --graph --full-history --all --color --date=short --pretty=format:\"%Cred%x09%h %Creset%ad%Cblue%d %Creset %s %C(bold)(%an)%Creset\"
+[core]
+  editor = vim
+  excludesfile = /Users/shin/.gitignore_global
+[filter "media"]
+  required = true
+  clean = git media clean %f
+  smudge = git media smudge %f
+[filter "hawser"]
+  clean = git hawser clean %f
+  smudge = git hawser smudge %f
+  required = true
+[filter "lfs"]
+  clean = git lfs clean %f
+  smudge = git lfs smudge %f
+  required = true
+[credential]
+  helper = cache --timeout=36000
+[push]
+  default = tracking
+[code]
+	excludesfile = /Users/shin/.gitignore_global

@@ -1,0 +1,30 @@
+- hosts: all
+  vars:
+    ansible_python_interpreter: '/usr/bin/env python3'
+  tasks:
+    - name: .gitconfig
+      file: src={{ playbook_dir }}/files/gitconfig dest=~/.gitconfig state=link force=yes
+      tags: git
+
+    - name: .gitignore_global
+      file: src={{ playbook_dir }}/files/gitignore_global dest=~/.gitignore_global state=link force=yes
+      tags: git
+
+    - name: .zshrc
+      file: src={{ playbook_dir }}/files/zshrc dest=~/.zshrc state=link force=yes
+      tags: zsh
+
+    - name: .tmux.conf
+      file: src={{ playbook_dir }}/files/tmux.conf dest=~/.tmux.conf state=link force=yes
+      tags: tmux
+
+    - name: ruby configs
+      file: src={{ playbook_dir }}/files/{{ item }} dest=~/.{{ item }} state=link force=yes
+      with_items:
+        - gemrc
+        - pryrc
+        - rubocop.yml
+      tags: ruby
+    - name: .vimrc
+      file: src={{ playbook_dir }}/files/vimrc dest=~/.vimrc state=link force=yes
+      tags: vim

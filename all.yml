@@ -1,0 +1,6 @@
+---
+
+- include: 'oh-my-zsh.yml'
+- include: 'vim.yml'
+# - include: 'dotfiles.yml'
+- include: 'addons.yml'

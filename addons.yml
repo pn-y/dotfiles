@@ -1,0 +1,102 @@
+---
+
+- hosts: all
+  vars:
+    ansible_python_interpreter: '/usr/bin/env python3'
+
+  tasks:
+    - shell: curl -sL https://deb.nodesource.com/setup_7.x | sudo -E bash -
+      when: ansible_distribution == 'Ubuntu'
+
+    - apt: name={{ item }} state=latest
+      become: yes
+      with_items:
+        - openssl
+        - libssl-dev
+        - ack-grep
+        - clang-format-3.6
+        - clang-3.6
+        - llvm
+        - exuberant-ctags
+        - curl
+        - python3-apt
+        - python3-pycurl
+        - python3-dev
+        - python3-setuptools
+        - flex
+      when: ansible_distribution == 'Ubuntu'
+      tags: always
+
+    # - composer:
+    #     command: "global"
+    #     arguments: "require squizlabs/php_codesniffer=*"
+    #     working_dir: "/tmp"
+    - shell: composer global require {{ item }}
+      ignore_errors: yes
+      # become: yes
+      with_items:
+        - "squizlabs/php_codesniffer=*"
+        - "mkusher/padawan=*"
+      tags:
+        - all
+        - php
+
+    - pip: name={{ item }} state=latest
+      become: yes
+      with_items:
+        - neovim
+        - pylint
+        - ansible-lint
+        - yamllint
+        - bashate
+        - sexpdata
+        - websocket-client
+      tags:
+        - all
+
+    - gem: name={{ item }} state=latest user_install=no
+      become: yes
+      ignore_errors: yes
+      with_items:
+        - rake
+        - neovim
+        - mdl
+        - haml-lint
+        - sqlint
+        - rubocop
+      tags:
+        - all
+        - ruby
+
+    - npm: name={{ item }} global=yes state=latest
+      become: yes
+      ignore_errors: yes
+      with_items:
+        - typescript
+        - typescript-formatter
+        - tern
+        - pug-lint
+        - livedown
+        - js-yaml
+        - stylelint
+        - js-beautify
+        - jsonlint
+        - eslint
+        - babel-eslint
+        - eslint-plugin-flowtype
+        - eslint-plugin-import
+        - eslint-import-resolver-webpack
+        - eslint-plugin-jsx-a11y
+        - eslint-config-airbnb
+        - eslint-plugin-react
+      tags:
+        - all
+        - eslint
+
+    - copy:
+        src: ./files/eslintrc
+        dest: ~/.eslintrc
+        backup: yes
+      tags:
+        - all
+        - eslint

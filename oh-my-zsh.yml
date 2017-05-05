@@ -1,0 +1,13 @@
+---
+
+- hosts: all
+  vars:
+    ansible_python_interpreter: '/usr/bin/env python3'
+  tasks:
+    - git:
+        repo: 'hhttps://github.com/robbyrussell/oh-my-zsh'
+        dest: ~/.oh-my-zsh
+
+    - file: src={{ curdir }}/files/{{ item }} dest=~/.{{ item }} state=link
+      with_items:
+        - zshrc
