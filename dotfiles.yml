@@ -28,3 +28,7 @@
     - name: .vimrc
       file: src={{ playbook_dir }}/files/vimrc dest=~/.vimrc state=link force=yes
       tags: vim
+
+    - name: .spacemacs
+      file: src={{ playbook_dir }}/files/spacemacs dest=~/.spacemacs state=link force=yes
+      tags: spacemacs
