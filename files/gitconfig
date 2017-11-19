@@ -30,7 +30,6 @@
   gst = g st
   gco = g co
   gci = g ci
-  gcm = g cm
   unstage = reset HEAD
   aa = add .
   # Not yet added - doesn't include ignored files
@@ -57,8 +56,7 @@
   rmdf = !git rm $(git ls-files --deleted)
   tree = log --graph --full-history --all --color --date=short --pretty=format:\"%Cred%x09%h %Creset%ad%Cblue%d %Creset %s %C(bold)(%an)%Creset\"
 [core]
-  editor = vim
-  excludesfile = /Users/shin/.gitignore_global
+  editor = nvim
 [filter "media"]
   required = true
   clean = git media clean %f
@@ -68,12 +66,13 @@
   smudge = git hawser smudge %f
   required = true
 [filter "lfs"]
-  clean = git lfs clean %f
-  smudge = git lfs smudge %f
+  clean = git-lfs clean -- %f
+  smudge = git-lfs smudge -- %f
+  process = git-lfs filter-process
   required = true
 [credential]
   helper = cache --timeout=36000
 [push]
   default = tracking
 [code]
-	excludesfile = /Users/shin/.gitignore_global
+  excludesfile = /Users/shin/.gitignore_global

@@ -49,17 +49,17 @@ ZSH_THEME="robbyrussell"
 # Custom plugins may be added to ~/.oh-my-zsh/custom/plugins/
 # Example format: plugins=(rails git textmate ruby lighthouse)
 # Add wisely, as too many plugins slow down shell startup.
-plugins=(git brew gem rails bundler docker osx git-flow)
+plugins=(git brew gem bundler docker osx git-flow)
 
 # User configuration
 
-export PATH=$PATH:/Users/shin/.rvm/gems/ruby-2.3.0/bin:/Users/shin/.rvm/gems/ruby-2.3.0@global/bin:/Users/shin/.rvm/rubies/ruby-2.3.0/bin:/Users/shin/.rvm/bin:/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin
-export PATH="/Applications/Postgres.app/Contents/Versions/9.5/bin:$PATH"
-export PATH="$(brew --prefix coreutils)/libexec/gnubin:/usr/local/bin:$PATH"
-export DOCKER_TLS_VERIFY=1
-export DOCKER_HOST=tcp://10.211.55.3:2376
-export DOCKER_CERT_PATH=/Users/shin/.docker/machine/machines/default
-export DOCKER_MACHINE_NAME=default
+# export PATH=$PATH:/Users/shin/.rvm/gems/ruby-2.3.0/bin:/Users/shin/.rvm/gems/ruby-2.3.0@global/bin:/Users/shin/.rvm/rubies/ruby-2.3.0/bin:/Users/shin/.rvm/bin:/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin
+# export PATH="/Applications/Postgres.app/Contents/Versions/9.5/bin:$PATH"
+# export PATH="$(brew --prefix coreutils)/libexec/gnubin:/usr/local/bin:$PATH"
+# export DOCKER_TLS_VERIFY=1
+# export DOCKER_HOST=tcp://10.211.55.3:2376
+# export DOCKER_CERT_PATH=/Users/shin/.docker/machine/machines/default
+# export DOCKER_MACHINE_NAME=default
 
 # export MANPATH="/usr/local/man:$MANPATH"
 
@@ -94,14 +94,20 @@ alias git="noglob git"
 alias rake='noglob rake'
 alias rrspec="bin/rspec"
 alias htop="sudo htop"
+# alias dcrsp="docker-compose -f docker-compose.yml -f docker-compose-dev.yml run --service-ports"
+# alias dcrr="docker-compose -f docker-compose.yml -f docker-compose-dev.yml run --rm"
 alias dcrsp="docker-compose run --service-ports"
 alias dcrr="docker-compose run --rm"
-alias vi="vim"
+alias vi="nvim"
+alias vim="nvim"
 
 autoload -U url-quote-magic
 zle -N self-insert url-quote-magic
 
 alias docker_stop_all='docker stop $(docker ps -a -q)'
+alias git_remove_merged='git branch --no-color --merged | grep -v "\*" | grep -v "master" | grep -v "develop" | grep -v "staging" | xargs -n 1 git branch -d'
 
 # added by travis gem
 [ -f /Users/shin/.travis/travis.sh ] && source /Users/shin/.travis/travis.sh
+
+[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
