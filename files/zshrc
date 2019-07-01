@@ -49,7 +49,7 @@ ZSH_THEME="robbyrussell"
 # Custom plugins may be added to ~/.oh-my-zsh/custom/plugins/
 # Example format: plugins=(rails git textmate ruby lighthouse)
 # Add wisely, as too many plugins slow down shell startup.
-plugins=(git brew gem bundler docker osx git-flow)
+plugins=(git brew gem bundler docker osx git-flow docker-compose)
 
 # User configuration
 
@@ -96,8 +96,8 @@ alias rrspec="bin/rspec"
 alias htop="sudo htop"
 # alias dcrsp="docker-compose -f docker-compose.yml -f docker-compose-dev.yml run --service-ports"
 # alias dcrr="docker-compose -f docker-compose.yml -f docker-compose-dev.yml run --rm"
-alias dcrsp="docker-compose run --service-ports"
-alias dcrr="docker-compose run --rm"
+alias dcrsp="docker-compose run --service-ports --use-aliases"
+alias dcrr="docker-compose run --rm --use-aliases"
 alias vi="nvim"
 alias vim="nvim"
 
@@ -111,3 +111,8 @@ alias git_remove_merged='git branch --no-color --merged | grep -v "\*" | grep -v
 [ -f /Users/shin/.travis/travis.sh ] && source /Users/shin/.travis/travis.sh
 
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
+
+export PATH="$HOME/.yarn/bin:$HOME/.config/yarn/global/node_modules/.bin:$PATH"
+
+# Add RVM to PATH for scripting. Make sure this is the last PATH variable change.
+export PATH="$PATH:$HOME/.rvm/bin"

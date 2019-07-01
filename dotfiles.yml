@@ -25,10 +25,19 @@
         - pryrc
         - rubocop.yml
       tags: ruby
+
     - name: .vimrc
       file: src={{ playbook_dir }}/files/vimrc dest=~/.vimrc state=link force=yes
       tags: vim
 
+    - name: .vimrc
+      file: src={{ playbook_dir }}/files/vimrc dest=~/.config/nvim/init.vim state=link force=yes
+      tags: nvim
+
     - name: .spacemacs
       file: src={{ playbook_dir }}/files/spacemacs dest=~/.spacemacs state=link force=yes
+      tags: spacemacs
+
+    - name: coc-settings
+      file: src={{ playbook_dir }}/files/coc-settings.json dest=~/.config/nvim/coc-settings.json state=link force=yes
       tags: spacemacs
